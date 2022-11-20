@@ -5,18 +5,19 @@ import childProcess from "child_process";
 import fs from "fs";
 
 // Packages
-import { BrowserWindow, app, ipcMain, IpcMainEvent } from 'electron';
+import { BrowserWindow, app, ipcMain, IpcMainEvent, screen } from 'electron';
 import isDev from 'electron-is-dev';
 
-const height = 500;
-const width = 1000;
 const exec = util.promisify(childProcess.exec);
 
 function createWindow() {
-  // Create the browser window.
+  const primaryDisplay = screen.getPrimaryDisplay();
+  const { width } = primaryDisplay.workAreaSize;
+  const h = width > 800 ? 500 : 300;
+  const w = width > 800 ? 1000 : 600;
   const window = new BrowserWindow({
-    width,
-    height,
+    width: w,
+    height: h,
     frame: false,
     resizable: false,
     autoHideMenuBar: true,
@@ -31,7 +32,6 @@ function createWindow() {
   const port = process.env.PORT || 3000;
   const url = isDev ? `http://localhost:${port}` : join(__dirname, '../src/out/index.html');
 
-  // and load the index.html of the app.
   if (isDev) {
     window?.loadURL(url);
   } else {
@@ -62,8 +62,7 @@ ipcMain.on('message', (event: IpcMainEvent, message: string) => {
 });
 
 ipcMain.on("getLang", (event: IpcMainEvent) => {
-  //event.sender.send("lang", app.getLocale())
-  event.sender.send("lang", "ja")
+  event.sender.send("lang", app.getLocale())
 })
 
 ipcMain.on("setSettings", async (_event: IpcMainEvent, key: string, value: string) => {
@@ -79,8 +78,8 @@ ipcMain.on("setSettings", async (_event: IpcMainEvent, key: string, value: strin
 
 ipcMain.on("exit", async (_event: IpcMainEvent) => {
   let user = await exec("whoami")
-  if (fs.existsSync(`/home/${user}/.xsession`)) {
-    fs.unlinkSync(`/home/${user}/.xsession`)
+  if (fs.existsSync(`/home/${user}/.config/autostart/vclinux-welcome.desktop`)) {
+    fs.unlinkSync(`/home/${user}/.config/autostart/vclinux-welcome.desktop`)
   }
   app.quit();
 })

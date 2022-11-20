@@ -26,21 +26,21 @@ function App() {
         <SplideSlide id="welcome">
           <div className="relative flex h-screen justify-between items-center px-8">
             <div className="flex flex-col justify-center items-start">
-              <h1 className="text-4xl mb-4 font-semibold">{t.welcome.heading}</h1>
-              <p className="mb-4">{t.welcome.body}</p>
+              <h1 className="text-3xl md:text-4xl mb-4 font-semibold">{t.welcome.heading}</h1>
+              <p className="mb-4 text-sm md:text-base">{t.welcome.body}</p>
               <button
-                className="bg-white py-2 px-8 rounded duration-200 focus:outline-none hover:bg-gray-200"
+                className="bg-white text-sm md:text-base py-2 px-8 rounded duration-200 focus:outline-none hover:bg-gray-200"
                 onClick={() => moveNext()}
               >
                 {t.next}
               </button>
             </div>
             <div>
-              <img src="img/logo.svg" className="h-40" />
+              <img src="img/logo.svg" className="h-20 md:h-40" />
             </div>
             <div className="absolute bottom-6 flex pr-16 w-full justify-between items-center">
               <button
-                className="bg-white py-2 px-8 rounded duration-200 focus:outline-none hover:bg-gray-200"
+                className="bg-white text-sm md:text-base py-2 px-8 rounded duration-200 focus:outline-none hover:bg-gray-200"
                 onClick={() => slideRef.current?.go(3)}
               >
                 {t.skip}
@@ -51,8 +51,8 @@ function App() {
         <SplideSlide id="wallpaper">
           <div className="relative flex h-screen justify-between items-start pt-10 px-8">
             <div className="flex flex-col justify-center items-start">
-              <h1 className="text-4xl mb-4 font-semibold">{t.wallpaper}</h1>
-              <div className="grid grid-cols-3 gap-4 mt-12">
+              <h1 className="text-2xl md:text-4xl mb-4 font-semibold">{t.wallpaper}</h1>
+              <div className="grid grid-cols-3 gap-4 md:mt-12">
                 <label htmlFor="fusion">
                   <img src="img/fusion.png" className="rounded-lg" />
                   <div className="flex items-center gap-2 mt-2">
@@ -65,7 +65,7 @@ function App() {
                       checked={wallpaper === 'fusion'}
                       onChange={(e) => setWallpaper(e.target.value)}
                     />
-                    <span className="text-xl font-semibold">Fusion</span>
+                    <span className="text-base md:text-xl font-semibold">Fusion</span>
                   </div>
                 </label>
                 <label htmlFor="light">
@@ -80,7 +80,7 @@ function App() {
                       checked={wallpaper === 'light'}
                       onChange={(e) => setWallpaper(e.target.value)}
                     />
-                    <span className="text-xl font-semibold">Light</span>
+                    <span className="text-base md:text-xl font-semibold">Light</span>
                   </div>
                 </label>
                 <label htmlFor="dark">
@@ -95,20 +95,20 @@ function App() {
                       checked={wallpaper === 'dark'}
                       onChange={(e) => setWallpaper(e.target.value)}
                     />
-                    <span className="text-xl font-semibold">Dark</span>
+                    <span className="text-base md:text-xl font-semibold">Dark</span>
                   </div>
                 </label>
               </div>
             </div>
             <div className="absolute bottom-6 flex pr-16 w-full justify-between items-center">
               <button
-                className="bg-white py-2 px-8 rounded duration-200 focus:outline-none hover:bg-gray-200"
+                className="bg-white text-sm md:text-base py-2 px-8 rounded duration-200 focus:outline-none hover:bg-gray-200"
                 onClick={() => movePrev()}
               >
                 {t.back}
               </button>
               <button
-                className="bg-white py-2 px-8 rounded duration-200 focus:outline-none hover:bg-gray-200"
+                className="bg-white text-sm md:text-base py-2 px-8 rounded duration-200 focus:outline-none hover:bg-gray-200"
                 onClick={() => moveNext('wallpaper', wallpaper)}
               >
                 {t.next}
@@ -119,8 +119,8 @@ function App() {
         <SplideSlide id="icon">
           <div className="relative flex h-screen justify-between items-start pt-10 px-8">
             <div className="flex flex-col justify-center items-start">
-              <h1 className="text-4xl mb-4 font-semibold">{t.icon}</h1>
-              <div className="grid grid-cols-3 gap-4 mt-10">
+              <h1 className="text-2xl md:text-4xl mb-4 font-semibold">{t.icon}</h1>
+              <div className="grid grid-cols-3 gap-4 md:mt-10">
                 <label htmlFor="tela-circle">
                   <img src="img/tela-circle.png" className="rounded-lg" />
                   <div className="flex items-center gap-2 mt-2">
@@ -133,7 +133,7 @@ function App() {
                       checked={icon === 'Tela-circle'}
                       onChange={(e) => setIcon(e.target.value)}
                     />
-                    <span className="text-xl font-semibold">Tela Circle</span>
+                    <span className="text-base md:text-xl font-semibold">Tela Circle</span>
                   </div>
                 </label>
                 <label htmlFor="breeze">
@@ -148,7 +148,7 @@ function App() {
                       checked={icon === 'Breeze'}
                       onChange={(e) => setIcon(e.target.value)}
                     />
-                    <span className="text-xl font-semibold">Breeze</span>
+                    <span className="text-base md:text-xl font-semibold">Breeze</span>
                   </div>
                 </label>
                 <label htmlFor="papirus">
@@ -163,20 +163,20 @@ function App() {
                       checked={icon === 'Papirus'}
                       onChange={(e) => setIcon(e.target.value)}
                     />
-                    <span className="text-xl font-semibold">Papirus</span>
+                    <span className="text-base md:text-xl font-semibold">Papirus</span>
                   </div>
                 </label>
               </div>
             </div>
             <div className="absolute bottom-6 flex pr-16 w-full justify-between items-center">
               <button
-                className="bg-white py-2 px-8 rounded duration-200 focus:outline-none hover:bg-gray-200"
+                className="bg-white text-sm md:text-base py-2 px-8 rounded duration-200 focus:outline-none hover:bg-gray-200"
                 onClick={() => movePrev()}
               >
                 {t.back}
               </button>
               <button
-                className="bg-white py-2 px-8 rounded duration-200 focus:outline-none hover:bg-gray-200"
+                className="bg-white text-sm md:text-base py-2 px-8 rounded duration-200 focus:outline-none hover:bg-gray-200"
                 onClick={() => moveNext('icon', icon)}
               >
                 {t.next}
@@ -186,17 +186,17 @@ function App() {
         </SplideSlide>
         <SplideSlide id="end">
           <div className="relative flex flex-col h-screen w-full justify-center items-center px-8 gap-4">
-            <h2 className="text-4xl font-semibold">{t.end.heading}</h2>
-            <p className="text-lg">{t.end.body}</p>
+            <h2 className="text-2xl md:text-4xl font-semibold">{t.end.heading}</h2>
+            <p className="text-base md:text-lg">{t.end.body}</p>
             <button
-              className="bg-white py-2 px-8 rounded duration-200 focus:outline-none hover:bg-gray-200"
+              className="bg-white text-sm md:text-base py-2 px-8 rounded duration-200 focus:outline-none hover:bg-gray-200"
               onClick={() => window.Main.exit()}
             >
               {t.close}
             </button>
             <div className="absolute bottom-6 px-8 flex w-full justify-between items-center">
               <button
-                className="bg-white py-2 px-8 rounded duration-200 focus:outline-none hover:bg-gray-200"
+                className="bg-white text-sm md:text-base py-2 px-8 rounded duration-200 focus:outline-none hover:bg-gray-200"
                 onClick={() => movePrev()}
               >
                 {t.back}

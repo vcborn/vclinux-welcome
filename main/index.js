@@ -11,14 +11,15 @@ const fs_1 = __importDefault(require("fs"));
 // Packages
 const electron_1 = require("electron");
 const electron_is_dev_1 = __importDefault(require("electron-is-dev"));
-const height = 500;
-const width = 1000;
 const exec = util_1.default.promisify(child_process_1.default.exec);
 function createWindow() {
-    // Create the browser window.
+    const primaryDisplay = electron_1.screen.getPrimaryDisplay();
+    const { width } = primaryDisplay.workAreaSize;
+    const h = width > 800 ? 500 : 300;
+    const w = width > 800 ? 1000 : 600;
     const window = new electron_1.BrowserWindow({
-        width,
-        height,
+        width: w,
+        height: h,
         frame: false,
         resizable: false,
         autoHideMenuBar: true,
@@ -31,7 +32,6 @@ function createWindow() {
     });
     const port = process.env.PORT || 3000;
     const url = electron_is_dev_1.default ? `http://localhost:${port}` : (0, path_1.join)(__dirname, '../src/out/index.html');
-    // and load the index.html of the app.
     if (electron_is_dev_1.default) {
         window?.loadURL(url);
     }
@@ -59,8 +59,7 @@ electron_1.ipcMain.on('message', (event, message) => {
     setTimeout(() => event.sender.send('message', 'hi from electron'), 500);
 });
 electron_1.ipcMain.on("getLang", (event) => {
-    //event.sender.send("lang", app.getLocale())
-    event.sender.send("lang", "ja");
+    event.sender.send("lang", electron_1.app.getLocale());
 });
 electron_1.ipcMain.on("setSettings", async (_event, key, value) => {
     switch (key) {
@@ -74,8 +73,8 @@ electron_1.ipcMain.on("setSettings", async (_event, key, value) => {
 });
 electron_1.ipcMain.on("exit", async (_event) => {
     let user = await exec("whoami");
-    if (fs_1.default.existsSync(`/home/${user}/.xsession`)) {
-        fs_1.default.unlinkSync(`/home/${user}/.xsession`);
+    if (fs_1.default.existsSync(`/home/${user}/.config/autostart/vclinux-welcome.desktop`)) {
+        fs_1.default.unlinkSync(`/home/${user}/.config/autostart/vclinux-welcome.desktop`);
     }
     electron_1.app.quit();
 });
