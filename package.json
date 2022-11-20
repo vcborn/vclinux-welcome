@@ -47,8 +47,20 @@
     "productName": "vclinux-welcome",
     "copyright": "CopyRight © 2022 ${author}",
     "asar": true,
-    "linux": {
+    "win": {
       "icon": "icon.png",
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}_${version}_portable.${ext}"
+    },
+    "linux": {
+      "icon": "icon.icns",
       "target": [
         {
           "target": "deb",

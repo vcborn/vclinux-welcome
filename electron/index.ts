@@ -2,6 +2,7 @@
 import { join } from 'path';
 import util from "util";
 import childProcess from "child_process";
+import fs from "fs";
 
 // Packages
 import { BrowserWindow, app, ipcMain, IpcMainEvent } from 'electron';
@@ -21,6 +22,7 @@ function createWindow() {
     autoHideMenuBar: true,
     fullscreenable: false,
     transparent: true,
+    icon: join(__dirname, "icon.png"),
     webPreferences: {
       preload: join(__dirname, 'preload.js')
     }
@@ -75,6 +77,10 @@ ipcMain.on("setSettings", async (_event: IpcMainEvent, key: string, value: strin
   }
 })
 
-ipcMain.on("exit", (_event: IpcMainEvent) => {
+ipcMain.on("exit", async (_event: IpcMainEvent) => {
+  let user = await exec("whoami")
+  if (fs.existsSync(`/home/${user}/.xsession`)) {
+    fs.unlinkSync(`/home/${user}/.xsession`)
+  }
   app.quit();
 })
